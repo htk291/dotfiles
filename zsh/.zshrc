@@ -84,8 +84,21 @@ export PGDATA=/usr/local/var/postgres
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 ### GOPATH
-export GOPATH="/usr/local/go"
+export GOPATH="$HOME/.go"
 export PATH="$GOPATH/bin:$PATH"
 #export ANDROID_HOME="/Applications/Android Studio.app/sdk/tools"
 alias perldoc="perldoc -M Pod::Text::Color::Delight"
 setopt nonomatch
+## <C+r> -> zsh_history | peco
+function exists { which $1 &> /dev/null }
+if exists peco; then
+    function peco_select_history() {
+        local tac
+        exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
+        BUFFER=$(fc -l -n 1 | eval $tac | peco --query "$LBUFFER")
+        CURSOR=$#BUFFER         # move cursor
+        zle -R -c               # refresh
+    }
+    zle -N peco_select_history
+    bindkey '^R' peco_select_history
+fi
