@@ -102,3 +102,6 @@ if exists peco; then
     zle -N peco_select_history
     bindkey '^R' peco_select_history
 fi
+## Setting for autojump
+[[ -s /Users/htk291/.autojump/etc/profile.d/autojump.sh ]] && source /Users/htk291/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
