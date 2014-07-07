@@ -8,6 +8,11 @@ export ZSH=$HOME/.oh-my-zsh
 #export ZSH_THEME="ys"
 export ZSH_THEME="robbyrussell"
 
+# option {{{
+setopt nolistbeep # ビープを鳴らさない
+setopt nobeep
+# }}}
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -104,4 +109,6 @@ if exists peco; then
 fi
 ## Setting for autojump
 [[ -s /Users/htk291/.autojump/etc/profile.d/autojump.sh ]] && source /Users/htk291/.autojump/etc/profile.d/autojump.sh
+
+## rake new_post['hoge']でエラーがでないようにする
 autoload -U compinit && compinit -u
