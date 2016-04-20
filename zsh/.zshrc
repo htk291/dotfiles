@@ -78,8 +78,8 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
-export PATH="$HOME/.plenv/bin:$PATH"
-eval "$(plenv init -)"
+#export PATH="$HOME/.plenv/bin:$PATH"
+#eval "$(plenv init -)"
 alias ctags=/usr/local/Cellar/ ctags/5.8/bin/ctags
 export LANG=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
@@ -94,6 +94,14 @@ export PATH="$GOPATH/bin:$PATH"
 #export ANDROID_HOME="/Applications/Android Studio.app/sdk/tools"
 alias perldoc="perldoc -M Pod::Text::Color::Delight"
 setopt nonomatch
+## Setting for autojump
+[[ -s /Users/htk291/.autojump/etc/profile.d/autojump.sh ]] && source /Users/htk291/.autojump/etc/profile.d/autojump.sh
+
+## rake new_post['hoge']でエラーがでないようにする
+autoload -U compinit && compinit -u
+
+### peco start ---------------------
+
 ## <C+r> -> zsh_history | peco
 function exists { which $1 &> /dev/null }
 if exists peco; then
@@ -107,8 +115,31 @@ if exists peco; then
     zle -N peco_select_history
     bindkey '^R' peco_select_history
 fi
-## Setting for autojump
-[[ -s /Users/htk291/.autojump/etc/profile.d/autojump.sh ]] && source /Users/htk291/.autojump/etc/profile.d/autojump.sh
+## git addするファイルをpecoで選択▼
+#function peco-select-gitadd() {
+#    local SELECTED_FILE_TO_ADD="$(git status --porcelain | \
+#                                  peco --query "$LBUFFER" | \
+#                                  awk -F ' ' '{print $NF}')"
+#    if [ -n "$SELECTED_FILE_TO_ADD" ]; then
+#        BUFFER="git add $(echo "$SELECTED_FILE_TO_ADD" | tr '\n' ' ')"
+#        CURSOR=$#BUFFER
+#    fi
+#    zle accept-line
+#    # zle clear-screen
+# }
+# zle -N peco-select-gitadd
+# bindkey "^g^a" peco-select-gitadd
+## git addするファイルをpecoで選択▲
 
-## rake new_post['hoge']でエラーがでないようにする
-autoload -U compinit && compinit -u
+### peco end ---------------------
+#eval "$(rbenv init -)"
+
+## nodebrew
+#export PATH="$PATH:$HOME/.nodebrew/current/bin"
+## perl6
+export PATH=$PATH:$HOME/perl6/bin
+## bundler
+export PATH="$HOME/.gem/ruby/2.0.0/bin:$PATH"
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+source ~/.mysqlenv/etc/bashrc

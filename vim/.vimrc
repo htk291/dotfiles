@@ -6,21 +6,34 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/bundle'))
 endif
 NeoBundle 'Shougo/neocomplcache.git'
-NeoBundle 'Shougo/neosnippet.git'
 NeoBundle 'Shougo/neosnippet-snippets.git'
-NeoBundle 'Shougo/vimshell.git'
+NeoBundle 'Shougo/neosnippet.git'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimshell.git'
 NeoBundle 'derekwyatt/vim-scala.git'
+NeoBundle 'hotchpotch/perldoc-vim'
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'moznion/hateblo.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'petdance/vim-perl'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'szw/vim-tags'
 NeoBundle 'tomasr/molokai.git'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'godlygeek/tabular'
 NeoBundle 'vim-scripts/errormarker.vim.git'
 NeoBundle 'wincent/Command-T'
-NeoBundle 'petdance/vim-perl'
-NeoBundle 'hotchpotch/perldoc-vim'
+NeoBundleLazy 'leafgarland/typescript-vim', {
+            \ 'autoload' : {
+            \   'filetypes' : ['typescript'] }
+            \}
+NeoBundleLazy 'jason0x43/vim-js-indent', {
+            \ 'autoload' : {
+            \   'filetypes' : ['javascript', 'typescript', 'html'],
+            \}}
+let g:js_indent_typescript = 1
 filetype plugin indent on     " Required!
 "   Installation check.
 if neobundle#exists_not_installed_bundles()
@@ -40,14 +53,18 @@ set autoindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
+"set paste
 " etc
 set smartcase
 set history=50
 set encoding=utf8
-syntax on
+"syntax on
+syntax enable
 
 " colorschehme
-colorscheme molokai
+set background=dark
+colorscheme solarized
+"colorscheme molokai
 let g:molokai_original=1
 
 " neocomplcache
@@ -107,3 +124,26 @@ let g:indent_guides_auto_colors = 1
 
 "color
 highlight Visual ctermbg=116
+
+"syntax highlighting
+autocmd BufNewFile,BufRead *.psgi   set filetype=perl
+autocmd BufNewFile,BufRead *.t      set filetype=perl
+autocmd BufNewFile,BufRead *.ep     set filetype=html
+autocmd BufNewFile,BufRead *.md     set filetype=markdown
+autocmd BufNewFile,BufRead Gemfile set filetype=ruby
+autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
+autocmd BufNewFile,BufRead Berksfile set filetype=ruby
+
+set clipboard=unnamed,autoselect
+
+" insertモードから抜ける
+inoremap <silent> jj <ESC>
+"inoremap <silent> <C-j> j
+"inoremap <silent> kk <ESC>
+"inoremap <silent> <C-k> k
+
+" 挿入モードでのカーソル移動
+"inoremap <C-j> <Down>
+"inoremap <C-k> <Up>
+"inoremap <C-h> <Left>
+"inoremap <C-l> <Right>
