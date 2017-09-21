@@ -1,5 +1,5 @@
 #!/bin/bash
 
-ln -s ./vim/vimrc ~/.vimrc
-ln -s ./zsh/zshrc ~/.zshrc
-ln -s ./tmux/tmux.conf ~/.tmux.conf
+ln -sf ./vim/vimrc ~/.vimrc
+ln -sf ./zsh/zshrc ~/.zshrc
+ln -sf ./tmux/tmux.conf ~/.tmux.conf

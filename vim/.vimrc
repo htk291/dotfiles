@@ -1,10 +1,23 @@
-" neobundle
-set nocompatible               " Be iMproved
-filetype off                   " Required!
-if has('vim_starting')
-  set runtimepath+=~/.vim/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle'))
+" Note: Skip initialization for vim-tiny or vim-small.
+if 0 | endif
+
+if &compatible
+  set nocompatible               " Be iMproved
 endif
+
+" Required:
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neosnippet-snippets.git'
 NeoBundle 'Shougo/neosnippet.git'
@@ -25,22 +38,18 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'vim-scripts/errormarker.vim.git'
 NeoBundle 'wincent/Command-T'
-NeoBundleLazy 'leafgarland/typescript-vim', {
-            \ 'autoload' : {
-            \   'filetypes' : ['typescript'] }
-            \}
-NeoBundleLazy 'jason0x43/vim-js-indent', {
-            \ 'autoload' : {
-            \   'filetypes' : ['javascript', 'typescript', 'html'],
-            \}}
-let g:js_indent_typescript = 1
-filetype plugin indent on     " Required!
-"   Installation check.
-if neobundle#exists_not_installed_bundles()
-  echomsg 'Not installed bundles : ' .
-        \ string(neobundle#get_not_installed_bundle_names())
-  echomsg 'Please execute ":NeoBundleInstall" command.'
-endif
+NeoBundle 'https://github.com/leafgarland/typescript-vim.git'
+NeoBundle 'https://github.com/clausreinke/typescript-tools.git'
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
 
 " display
 set showmatch
@@ -71,8 +80,8 @@ let g:molokai_original=1
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_dictionary_filetype_lists = {
     \ 'default' : '',
-    \ 'scala' : $HOME . '/.vim/dict/scala.dict',
-    \ }
+        \ 'scala' : $HOME . '/.vim/dict/scala.dict',
+            \ }
 
 " neosnippet
 "   Plugin key-mappings.
@@ -84,8 +93,8 @@ smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" 
 "   For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
-endif
-let g:neosnippet#snippets_directory='~/.vim/snippets'
+  endif
+  let g:neosnippet#snippets_directory='~/.vim/snippets'
 
 " vimsehll
 let g:vimshell_interactive_update_time = 10
